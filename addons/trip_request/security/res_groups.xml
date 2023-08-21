@@ -1,0 +1,8 @@
+<odoo>
+   <record model="res.groups" id="itq_trip_request_users">
+       <field name="name">Trip Requests User</field>
+   </record>
+    <record model="res.groups" id="itq_trip_request_managers">
+       <field name="name">Trip Requests Manager</field>
+   </record>
+</odoo>

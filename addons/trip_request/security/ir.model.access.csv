@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_itq_trip_request_user,access_itq_trip_request_user,model_itq_trip_request,itq_trip_request_users,1,1,1,0
+access_itq_trip_request_manager,access_itq_trip_request_manager,model_itq_trip_request,itq_trip_request_managers,1,1,1,1
+

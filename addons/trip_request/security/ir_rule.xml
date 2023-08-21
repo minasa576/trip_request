@@ -1,0 +1,27 @@
+<odoo>
+    <record model="ir.rule" id="created_trip_request_by_user">
+        <field name="name"> Created Trip Requests By User</field>
+        <field name="model_id" ref="model_itq_trip_request"/>
+        <field name="groups" eval="[(4,ref('trip_request.itq_trip_request_users'))]"/>
+        <field name="domain_force">[('create_uid', '=', user.id)] </field>
+
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record model="ir.rule" id="created_trip_request_by_manager">
+        <field name="name"> Created Trip Requests By Manager</field>
+        <field name="model_id" ref="model_itq_trip_request"/>
+        <field name="groups" eval="[(4,ref('trip_request.itq_trip_request_managers'))]"/>
+        <field name="domain_force">[(1, '=', 1)] </field>
+
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+
+</odoo>

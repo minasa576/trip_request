@@ -1,0 +1,16 @@
+<odoo>
+     <!-- form view -->
+    <record id="itq_trip_request_view" model="ir.ui.view">
+        <field name="name">itq.trip.request.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+                <xpath expr="//field[@name='work_location']" position="after">
+                    <group>
+                        <field name="allowed_destinations"/>
+                        <field name="trip_request_ids" />
+                    </group>
+                </xpath>
+        </field>
+    </record>
+</odoo>

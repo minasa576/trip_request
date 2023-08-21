@@ -1,0 +1,65 @@
+<odoo>
+    <!-- tree view -->
+    <record id="itq_trip_request_tree_view" model="ir.ui.view">
+        <field name="name">itq.trip.request.tree</field>
+            <field name="model">itq.trip.request</field>
+            <field name="arch" type="xml">
+                <tree>
+    				<field name="employee_id" />
+    				<field name="destination_id" />
+    				<field name="start_date" />
+                    <field name="end_date" />
+    				<field name="number_of_rest_days" />
+                    <field name="trip_days" />
+    				<field name="state" />
+                    <field name="last_state_change_by_id" />
+    			</tree>
+            </field>
+    </record>
+
+    <!-- form view -->
+    <record id="itq_trip_request_form_view" model="ir.ui.view">
+         <field name="name">itq.trip.request.form</field>
+        <field name="model">itq.trip.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <field name="state" widget="statusbar"  statusbar_click="1"/>
+                    </header>
+                    <group>
+                        <group>
+                            <field name="employee_id" />
+                            <field name="destination_id" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="number_of_rest_days" />
+                            <field name="trip_days" />
+                            <field name="state" />
+                            <field name="last_state_change_by_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- action -->
+    <record id="itq_trip_request_act" model="ir.actions.act_window">
+        <field name="name">Trip Request</field>
+        <field name="res_model">itq.trip.request</field>
+        <field name="view_mode">tree,form</field>
+        <field
+                name="view_id"
+                ref="trip_request.itq_trip_request_tree_view"
+        />
+    </record>
+
+
+    <!-- menu item -->
+    <menuitem
+            id="itq_trip_request_menu_item"
+            action="trip_request.itq_trip_request_act"
+            name="Trip Requests"
+        />
+</odoo>

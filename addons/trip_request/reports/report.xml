@@ -1,0 +1,28 @@
+<odoo>
+    <report
+        id="report_session"
+        model="itq.trip.request"
+        string="Report"
+        name="trip_request.report_session_view"
+    />
+    <template id="report_session_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Trip Request</h2>
+                        <p>Employee <span t-field="o.employee_id"/></p>
+                        <p>from
+                            <span t-field="o.start_date"/>
+                            to
+                            <span t-field="o.end_date"/>
+                        </p>
+                        <p>Trip Days <span t-field="o.trip_days" /></p>
+                        <p>State <span t-field="o.state" /></p>
+                        <p>Last Change By: <span t-field="o.last_state_change_by_id" /></p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
