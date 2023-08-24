@@ -15,26 +15,29 @@ class ItqTripRequest(models.Model):
     destination_id = fields.Many2one('res.country', string="Destination", required=True)
     start_date = fields.Date(required=True)
     end_date = fields.Date(required=True)
-    number_of_rest_days = fields.Integer()
+    number_of_rest_days = fields.Integer(required=True)
     trip_days = fields.Integer(string="Trip Days", compute="calc_trip_days")
-    state = fields.Selection([('draft', "Draft"), ('confirmed', "Confirmed"), ('ended', "Ended"), ('cancelled', "Cancelled")])
-    last_state_change_by_id = fields.Many2one('res_users', string="Last Status Change By", readonly=True)
+    state = fields.Selection(
+        [('draft', "Draft"), ('confirmed', "Confirmed"), ('ended', "Ended"), ('cancelled', "Cancelled")])
+    last_state_change_by_id = fields.Many2one('res.users', string="Last Status Change By", readonly=True)
+    allowed_destinations_ids = fields.Many2many(related="employee_id.allowed_destinations")
 
     @api.onchange('start_date')
     def set_end_date_to_empty(self):
         self.end_date = False
 
-    @api.depends('start_date', 'end_date')
+    @api.depends('start_date', 'end_date', 'number_of_rest_days')
     def calc_trip_days(self):
         for rec in self:
             if rec.end_date and rec.start_date and rec.end_date >= rec.start_date:
-                rec.trip_days = (rec.end_date - rec.start_date).days
+                rec.trip_days = (rec.end_date - rec.start_date).days - rec.number_of_rest_days
+                if rec.trip_days < 0:
+                    rec.trip_days = 0
             else:
                 rec.trip_days = 0
 
-    @api.onchange('employee_id')
-    def determine_destinations(self):
-        allowed_destination_ids = self.employee_id.allowed_destinations.ids
-        return {'domain': {
-            'destination_id': [('id', 'in', allowed_destination_ids)]
-        }}
+    def write(self, values):
+        print(values)
+        if 'state' in values:
+            values['last_state_change_by_id'] = self.env.user
+        return super(ItqTripRequest, self).write(values)

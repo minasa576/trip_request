@@ -2,7 +2,7 @@
     <report
         id="report_session"
         model="itq.trip.request"
-        string="Report"
+        string="Print"
         name="trip_request.report_session_view"
     />
     <template id="report_session_view">
