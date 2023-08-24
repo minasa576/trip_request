@@ -1,12 +1,3 @@
 __pycache__/
 *.py[cod]
-*$py.class
 
-# Ignore virtual machine files and directories
-*.vmx
-*.vmdk
-*.ova
-*.ovf
-*.vbox
-*.vbox-prev
-.vagrant/
